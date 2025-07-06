@@ -73,7 +73,7 @@ function isCommonPassword(password) {
 
 function estimateCrackTime(entropy) {
   if (entropy === 0) return 'Instant';
-  
+
   const guessesPerSecond = 1e9;
   const totalPossibilities = Math.pow(2, entropy);
   const averageGuesses = totalPossibilities / 2;
@@ -87,3 +87,32 @@ function estimateCrackTime(entropy) {
   if (seconds < 31536000000) return `${Math.round(seconds / 31536000)} years`;
   return `${Math.round(seconds / 31536000000)} billion years`;
 }
+
+function checkPassword(password) {
+  const checks = {
+      length: password.length >= 8,
+      lowercase: /[a-z]/.test(password),
+      uppercase: /[A-Z]/.test(password),
+      numbers: /[0-9]/.test(password),
+      symbols: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+  };
+  
+  const basicScore = Object.values(checks).filter(Boolean).length;
+  
+  const entropy = calculateShannonEntropy(password);
+  
+  const isCommon = isCommonPassword(password);
+  
+  let finalScore = basicScore;
+  
+  if (isCommon) {
+      finalScore = Math.max(0, finalScore - 3);
+  }
+  if (entropy > 40) finalScore = Math.max(finalScore, 3);
+  if (entropy > 60) finalScore = Math.max(finalScore, 4);
+  if (entropy > 80) finalScore = Math.max(finalScore, 5);
+  
+  return { checks, score: finalScore, entropy, isCommon };
+}
+
+
