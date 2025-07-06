@@ -22,10 +22,10 @@ document.addEventListener("DOMContentLoaded", function () {
     
     if (input.type === 'password') {
         input.type = 'text';
-        button.textContent = '🙈';
+        button.innerHTML = '&#128584;';
     } else {
         input.type = 'password';
-        button.textContent = '👁️';
+        button.innerHTML = '&#128064;';
     }
 }
 
