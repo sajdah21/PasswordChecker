@@ -16,6 +16,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   
 
+  function togglePassword() {
+    const input = document.getElementById('passwordInput');
+    const button = document.querySelector('.toggle-btn');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        button.textContent = '🙈';
+    } else {
+        input.type = 'password';
+        button.textContent = '👁️';
+    }
+}
+
 //pulled from University of Texas at Austin Lecture 35: Entropy of English
   const letterFreq = {
     'a': 0.08167, 'b': 0.01492, 'c': 0.02782, 'd': 0.04253, 'e': 0.12702,
@@ -31,6 +44,7 @@ const commonPasswords = [
     '123456', '123456789', '12345678', 'password', 'qwerty123', 'qwerty1', '111111', '12345', 'secret', '123123','1234567890', '1234567', '000000', 'qwerty', 'abc123', 'password1', 'iloveyou','dragon','monkey','123123123','123321','qwertyuiop','Password', '654321','target123','tinkle','1q2w3e4r5t','121212','abcd1234','aaaaaa','princess','football','sunshine','computer','letmein'
 
 ];
+
 
 function calculateShannonEntropy(password) {
   if (!password) return 0;
@@ -52,3 +66,4 @@ function calculateShannonEntropy(password) {
   
   return entropy * totalLength; 
 }
+
