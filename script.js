@@ -6,10 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
       gyroControls: false,
       minHeight: 200.00,
       minWidth: 200.00,
-      highlightColor: 0x8298fa,
-      midtoneColor: 0xaa1172,
-      lowlightColor: 0xff5d9c,
-      baseColor: 0x010955,
+      highlightColor: 0xfb9062,
+      midtoneColor: 0xee5d6c,
+      lowlightColor: 0xce4993,
+      baseColor: 0x6a0d83,
       blurFactor: 0.90,
       zoom: 0.40
     });
@@ -31,3 +31,24 @@ const commonPasswords = [
     '123456', '123456789', '12345678', 'password', 'qwerty123', 'qwerty1', '111111', '12345', 'secret', '123123','1234567890', '1234567', '000000', 'qwerty', 'abc123', 'password1', 'iloveyou','dragon','monkey','123123123','123321','qwertyuiop','Password', '654321','target123','tinkle','1q2w3e4r5t','121212','abcd1234','aaaaaa','princess','football','sunshine','computer','letmein'
 
 ];
+
+function calculateShannonEntropy(password) {
+  if (!password) return 0;
+  
+  const charCount = {};
+  const totalLength = password.length;
+  
+  for (let char of password.toLowerCase()) {
+      charCount[char] = (charCount[char] || 0) + 1;
+  }
+  
+  let entropy = 0;
+  for (let char in charCount) {
+      const frequency = charCount[char] / totalLength;
+      if (frequency > 0) {
+          entropy -= frequency * Math.log2(frequency);
+      }
+  }
+  
+  return entropy * totalLength; 
+}
