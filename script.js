@@ -116,3 +116,26 @@ function checkPassword(password) {
 }
 
 
+function getStrengthLevel(score) {
+  if (score === 0) return { level: 'very-weak', text: 'Very Weak', width: 0 };
+  if (score === 1) return { level: 'very-weak', text: 'Very Weak', width: 20 };
+  if (score === 2) return { level: 'weak', text: 'Weak', width: 40 };
+  if (score === 3) return { level: 'fair', text: 'Fair', width: 60 };
+  if (score === 4) return { level: 'good', text: 'Good', width: 80 };
+  if (score === 5) return { level: 'strong', text: 'Strong', width: 100 };
+}
+
+function updateRequirements(checks) {
+  const requirements = ['length', 'lowercase', 'uppercase', 'numbers', 'symbols'];
+  
+  requirements.forEach(req => {
+      const icon = document.getElementById(`${req}-icon`);
+      if (checks[req]) {
+          icon.className = 'requirement-icon requirement-met';
+          icon.textContent = '✓';
+      } else {
+          icon.className = 'requirement-icon requirement-not-met';
+          icon.textContent = '✗';
+      }
+  });
+}
