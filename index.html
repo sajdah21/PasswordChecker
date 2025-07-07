@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="styles/fonts.css">
+<link rel="stylesheet" href="styles/password-checker.css">
+
+
+<body>
+<div id="vanta-bg"> </div>
+    <div class="container-wrapper">
+    
+      <div class="container">
+        <h1>Password Strength Checker</h1>
+
+        <div class="input-group">
+            <input type="password" id="passwordInput" placeholder="Enter your password...">
+            <button type="button" class="toggle-btn" onclick="togglePassword()">&#128064;</button>
+        </div>
+
+        <div class="strength-meter">
+            <div class="strength-bar" id="strengthBar"></div>
+        </div>
+
+        <div class="strength-text" id="strengthText">Enter a password to analyze</div>
+
+        <div class="analysis" id="analysis" style="display: none;">
+            <div class="metric">
+                <span>Shannon Entropy:</span>
+                <span id="entropy">-</span>
+            </div>
+            <div class="metric">
+                <span>Length:</span>
+                <span id="length">-</span>
+            </div>
+            <div class="metric">
+                <span>Character Sets:</span>
+                <span id="charSets">-</span>
+            </div>
+            <div class="metric">
+                <span>Estimated Crack Time:</span>
+                <span id="crackTime">-</span>
+            </div>
+
+            <div class="suggestions" id="suggestions">
+                <h4>Suggestions:</h4>
+                <div id="suggestionsList"></div>
+            </div>
+        </div>
+     </div>
+    </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+<script src="script.js"></script>
+</body>

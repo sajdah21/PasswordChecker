@@ -1,0 +1,19 @@
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("../Assets/Fonts/JetBrainsMono-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "JetBrains Mono Italic";
+    src: url("../Assets/Fonts/JetBrainsMono-Italic-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "Playfair Display";
+    src: url("../Assets/Fonts/PlayfairDisplay-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "Playfair Display Italic";
+    src: url("../Assets/Fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf");
+}
