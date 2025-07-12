@@ -132,10 +132,55 @@ function updateRequirements(checks) {
       const icon = document.getElementById(`${req}-icon`);
       if (checks[req]) {
           icon.className = 'requirement-icon requirement-met';
-          icon.textContent = '✓';
+          icon.innerHTML = '&#x2713;';
       } else {
           icon.className = 'requirement-icon requirement-not-met';
-          icon.textContent = '✗';
+          icon.innerHTML = '&#x2717;';
       }
   });
 }
+
+function updateStrength(password) {
+    const result = checkPassword(password);
+    const strength = getStrengthLevel(result.score);
+    
+    const strengthBar = document.getElementById('strengthBar');
+    const strengthText = document.getElementById('strengthText');
+    
+    if (password.length === 0) {
+        strengthBar.style.width = '0%';
+        strengthBar.className = 'strength-bar';
+        strengthText.textContent = 'Enter a password to analyze';
+        document.getElementById('analysis').style.display = 'none';
+        return;
+    }
+    
+    strengthBar.style.width = strength.width + '%';
+    strengthBar.className = `strength-bar ${strength.level}`;
+    strengthText.textContent = strength.text;
+    
+    document.getElementById('entropy').textContent = result.entropy.toFixed(2) + ' bits';
+    document.getElementById('length').textContent = password.length + ' characters';
+    
+    let charSets = 0;
+    if (result.checks.lowercase) charSets++;
+    if (result.checks.uppercase) charSets++;
+    if (result.checks.numbers) charSets++;
+    if (result.checks.symbols) charSets++;
+    
+    document.getElementById('charSets').textContent = charSets + '/4';
+    document.getElementById('crackTime').textContent = estimateCrackTime(result.entropy);
+    
+    updateRequirements(result.checks);
+    
+    if (result.isCommon) {
+        document.getElementById('crackTime').textContent = 'Instant (Common Password)';
+    }
+    
+    document.getElementById('analysis').style.display = 'block';
+}
+document.getElementById('passwordInput').addEventListener('input', function(e) {
+  updateStrength(e.target.value);
+});
+
+updateStrength('');
