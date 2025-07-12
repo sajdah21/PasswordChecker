@@ -12,7 +12,7 @@ An interactive password strength analyzer that uses Shannon entropy, character s
 
 - Character set analysis (uppercase, lowercase, numbers, symbols)
 
-- Visual strength meter with six levels (Very Weak to Very Strong)
+- Visual strength meter with five levels (Very Weak to Strong)
 
 - Common password detection (based on NordPass top 200 list)
 
